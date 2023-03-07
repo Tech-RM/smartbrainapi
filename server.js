@@ -40,7 +40,7 @@ app.get('/profile/:id',(req,res)=>profile.handleProfileUpdate(req,res,db));
 //update entries endpoint
 app.put('/image',(req,res)=>image.handleImageCalls(req,res,db));
 
-app.listen(process.env.PORT|| 3001, function(){
+var server=app.listen(process.env.PORT|| 3001, function(){
     console.log('app is running on port', server.address().port);
 });
 
