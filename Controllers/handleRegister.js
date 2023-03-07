@@ -29,24 +29,5 @@ const handleRegistration=(req,res,db,bcrypt)=>{
         .catch(trx.rollback)
     })
     .catch(err=>console.log(err))
-
-    // db.transaction(trx=>{
-    //                 trx.insert({
-    //                     email:email,
-    //                     hash:hash
-    //                 }).into('login')
-    //                 .returning('email')
-    //                 .then(loginEmail=>{
-    //                     trx('users').insert({
-    //                         name:name,
-    //                         email:loginEmail[0].email,
-    //                         joined:new Date()  
-    //                     }).returning('*')
-    //                     .then(user=>res.json(user[0]));
-    //                 })
-    //                 .then(trx.commit)
-    //                 .catch(trx.rollback)
-    //     })
-        
 }
 module.exports={handleRegistration};

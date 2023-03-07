@@ -13,10 +13,10 @@ const image =require('./Controllers/image');
 const db=knex({
             client: 'pg',
             connection: {
-            host : 'db.kbrrtjyngeduzfparnuo.supabase.co',
+            host : process.env.dburl,
             port : 5432,
             user : 'postgres',
-            password : 'SmartBrain@54321',
+            password : process.env.dbPassword,
             database : 'postgres'
             }
         });
@@ -26,7 +26,7 @@ const app=express();
 app.use(bodyParser.json()); // body-parser is a middleware.
 app.use(cors());
 
-app.get('/',(req,res)=>profile.handleLoadUsers(req,res,db))
+app.get('/',(req,res)=>profile.handleLoadUsers(req,res,db));
 
 //signin endpoint
 app.post('/signin',(req,res)=>handleSignIn(req,res,db,bcrypt));
@@ -40,7 +40,9 @@ app.get('/profile/:id',(req,res)=>profile.handleProfileUpdate(req,res,db));
 //update entries endpoint
 app.put('/image',(req,res)=>image.handleImageCalls(req,res,db));
 
-app.listen(3001);
+app.listen(process.env.PORT|| 3001, function(){
+    console.log('app is running on port', server.address().port);
+});
 
 
 //3. update image entry while passing user id or something unique params.
