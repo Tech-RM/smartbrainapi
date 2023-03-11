@@ -8,7 +8,6 @@ const {handleSignIn}=require('./Controllers/handleSignIn');
 const {handleRegistration}=require('./Controllers/handleRegister');
 const profile=require('./Controllers/profile');
 const image =require('./Controllers/image');
-const {handleClarifaiCalls}= require('./Controllers/handleClarifaiCalls');
 
 //handeling Clarifai API calls and consoling on the node server
 // handleClarifaiCalls('https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg');

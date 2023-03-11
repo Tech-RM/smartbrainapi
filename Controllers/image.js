@@ -1,16 +1,39 @@
-const {handleClarifaiCalls}=require('./handleClarifaiCalls');
+const {ClarifaiStub, grpc} = require("clarifai-nodejs-grpc");
+
+    
 
 const handleImageCalls=(req,res,db)=>{
     const {id,url}=req.body;
-    console.log(req.body);
-
-
-    db('users')
-    .where('user_id', '=', id)
-    .increment('entries', 1)
-    .returning('entries')
-    .then(response=>res.json(response));
-//    handleClarifaiCalls(url,res);
-   
+    const stub = ClarifaiStub.grpc();
+    
+    const metadata = new grpc.Metadata();
+    metadata.set("authorization", "Key 9e66f3bd7a9d4b50b28b1371d0036384");
+    
+    stub.PostModelOutputs(
+        {
+            // This is the model ID of a publicly available General model. You may use any other public or custom model ID.
+            model_id: "face-detection",
+            inputs: [{data: {image: {url: url}}}]
+        },
+        metadata,
+        (err, response) => {
+            if (err) {
+                console.log("Error: " + err);
+                return;
+            }
+    
+            if (response.status.code !== 10000) {
+                console.log("Received failed status: " + response.status.description + "\n" + response.status.details);
+                return;
+            }else{
+                let data=response.outputs[0].data.regions[0].region_info.bounding_box;
+                db('users')
+                .where('user_id', '=', id)
+                .increment('entries', 1)
+                .returning('entries')
+                .then(response=>res.json({...data,...response[0]}));
+            }
+        }
+    );
 }
 module.exports={handleImageCalls};
