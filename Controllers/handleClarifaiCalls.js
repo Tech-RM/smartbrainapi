@@ -7,7 +7,8 @@ const stub = ClarifaiStub.grpc();
 
 const metadata = new grpc.Metadata();
 const authKey=process.env.clarifaiKey;
-metadata.set("authorization", "Key authKey");
+console.log(authKey);
+metadata.set("authorization", "Key 9e66f3bd7a9d4b50b28b1371d0036384");
 
 stub.PostModelOutputs(
     {
