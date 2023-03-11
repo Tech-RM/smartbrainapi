@@ -10,7 +10,7 @@ const handleImageCalls=(req,res,db)=>{
     .increment('entries', 1)
     .returning('entries')
     .then(response=>res.json(response));
-   handleClarifaiCalls(url,res);
+//    handleClarifaiCalls(url,res);
    
 }
 module.exports={handleImageCalls};
