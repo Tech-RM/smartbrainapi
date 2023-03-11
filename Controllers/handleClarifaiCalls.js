@@ -31,7 +31,7 @@ stub.PostModelOutputs(
     
         }
     }
-).catch(err=>console.log(err));
+)
 }
 
 module.exports={handleClarifaiCalls};
