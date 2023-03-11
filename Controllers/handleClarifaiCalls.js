@@ -3,7 +3,7 @@ const cors = require('cors');
 
 
 const handleClarifaiCalls=(url,res)=>{
-    handleClarifaiCalls.use(cors);
+    handleClarifaiCalls.use(cors());
 
 const stub = ClarifaiStub.grpc();
 
