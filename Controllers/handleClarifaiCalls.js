@@ -6,7 +6,8 @@ const handleClarifaiCalls=(url,res)=>{
 const stub = ClarifaiStub.grpc();
 
 const metadata = new grpc.Metadata();
-metadata.set("authorization", "Key process.env.clarifaiKey");
+const authKey=process.env.clarifaiKey;
+metadata.set("authorization", "Key authKey");
 
 stub.PostModelOutputs(
     {
@@ -31,7 +32,7 @@ stub.PostModelOutputs(
     
         }
     }
-)
+);
 }
 
 module.exports={handleClarifaiCalls};
