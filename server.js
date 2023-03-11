@@ -41,7 +41,12 @@ app.post('/register',(req,res)=>handleRegistration(req,res,db,bcrypt));
 app.get('/profile/:id',(req,res)=>profile.handleProfileUpdate(req,res,db));
 
 //update entries endpoint
-app.put('/image',(req,res)=>image.handleImageCalls(req,res,db));
+app.put('/image',
+cors({
+    origin: '*',
+    credentials: true
+  }),
+  (req,res)=>image.handleImageCalls(req,res,db));
 const PORT=process.env.PORT||3001;
 
 app.listen(PORT, function(){

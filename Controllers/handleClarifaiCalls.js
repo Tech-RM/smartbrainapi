@@ -1,9 +1,7 @@
 const {ClarifaiStub, grpc} = require("clarifai-nodejs-grpc");
-const cors = require('cors');
 
 
 const handleClarifaiCalls=(url,res)=>{
-    handleClarifaiCalls.use(cors());
 
 const stub = ClarifaiStub.grpc();
 
