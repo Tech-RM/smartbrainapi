@@ -8,7 +8,10 @@ const {handleSignIn}=require('./Controllers/handleSignIn');
 const {handleRegistration}=require('./Controllers/handleRegister');
 const profile=require('./Controllers/profile');
 const image =require('./Controllers/image');
+const {handleClarifaiCalls}= require('./Controllers/handleClarifaiCalls');
 
+//handeling Clarifai API calls and consoling on the node server
+// handleClarifaiCalls('https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg');
 //connecting to postgress using knex.js library...
 const db=knex({
             client: 'pg',
@@ -39,9 +42,10 @@ app.get('/profile/:id',(req,res)=>profile.handleProfileUpdate(req,res,db));
 
 //update entries endpoint
 app.put('/image',(req,res)=>image.handleImageCalls(req,res,db));
+const PORT=process.env.PORT||3001;
 
-var server=app.listen(process.env.PORT|| 3001, function(){
-    console.log('app is running on port', server.address().port);
+app.listen(PORT, function(){
+    console.log('app is running on port', PORT);
 });
 
 
